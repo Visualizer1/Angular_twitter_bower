@@ -1,0 +1,85 @@
+<!doctype html>
+<html ng-app="MyApp">
+  <head>
+	<script   src="JSLIB/jquery-1.12.3.js" ></script>
+	<link rel="stylesheet" href="CSS/bootstrap.min.css" >
+	<link rel="stylesheet" href="CSS/style.css" >
+	<script src="JSLIB/bootstrap.min.js" ></script>
+	<script src="JSLIB/angular.js"></script>
+	<script src="JSLIB/highcharts.js"></script>
+    <script src="main.js"></script>
+ </head>
+  <body>
+    <div ng-controller="MainCtrl" >
+		<div class="container" style="margin-top:20px;" >
+			<div class="row" >
+				<div class="col-md-4" >
+					<div class="form-group">
+						<label for="exampleInputEmail1">Screen Name {{model.tweets.length>0}}</label>
+						<input type="text" class="form-control" placeholder="Screen Name" ng-model="model.screenName" >
+					</div>
+					<button type="submit" class="btn btn-primary" ng-click="getTwitterProfile()"  >Get Twitter Profile</button>
+				</div>
+			</div>
+			<div class="row" ng-show="model.tweets.length>0" >
+			<h1>Twitter Profile Card</h1>
+				<!-- code start -->
+				<div class="twPc-div">
+					<a class="twPc-bg twPc-block"></a>
+					<div>
+						<div class="twPc-button">
+							<!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
+							<a href="https://twitter.com/{{model.tweets[0].user.screen_name}}" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow @{{model.tweets[0].user.screen_name}}</a>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+							<!-- Twitter Button -->   
+						</div>
+
+						<a title="{{model.tweets[0].user.name}}" href="https://twitter.com/{{model.tweets[0].user.screen_name}}" class="twPc-avatarLink">
+							<img alt="{{model.tweets[0].user.name}}" src="{{model.tweets[0].user.profile_image_url}}" class="twPc-avatarImg">
+						</a>
+
+						<div class="twPc-divUser">
+							<div class="twPc-divName">
+							<br/>	<a href="https://twitter.com/{{model.tweets[0].user.screen_name}}">{{model.tweets[0].user.name}}</a>
+							</div>
+							<span>
+								<a href="https://twitter.com/{{model.tweets[0].user.screen_name}}">@<span>{{model.tweets[0].user.screen_name}}</span></a>
+							</span>
+						</div>
+
+						<div class="twPc-divStats">
+							<ul class="twPc-Arrange">
+								<li class="twPc-ArrangeSizeFit">
+									<a href="https://twitter.com/{{model.tweets[0].user.screen_name}}" title="9.840 Tweet">
+										<span class="twPc-StatLabel twPc-block">Tweets</span>
+										<span class="twPc-StatValue">{{model.tweets.length}}</span>
+									</a>
+								</li>
+								<li class="twPc-ArrangeSizeFit">
+									<a href="https://twitter.com/{{model.tweets[0].user.screen_name}}/following" title="885 Following">
+										<span class="twPc-StatLabel twPc-block">Following</span>
+										<span class="twPc-StatValue">{{model.tweets[0].user.followers_count}}</span>
+									</a>
+								</li>
+								<li class="twPc-ArrangeSizeFit">
+									<a href="https://twitter.com/{{model.tweets[0].user.screen_name}}/followers" title="1.810 Followers">
+										<span class="twPc-StatLabel twPc-block">Followers</span>
+										<span class="twPc-StatValue">{{model.tweets[0].user.friends_count}}</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+                        
+					</div>
+                               
+				</div>
+				<!-- code end -->
+     
+			</div>
+           
+		</div>
+		<div id="chart" >
+		</div>
+	</div>
+  </body>
+</html>
